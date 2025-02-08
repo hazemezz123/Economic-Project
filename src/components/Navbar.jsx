@@ -27,34 +27,34 @@ function Navbar({ user, setUser }) {
                 alt="Scooter Rental"
               />
             </Link>
-            <div className="hidden sm:mr-6 sm:flex sm:space-x-8">
+            <div className="hidden sm:mr-6 sm:flex sm:space-x-8 ">
               <Link
                 to="/"
-                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-bold"
               >
                 الرئيسية
               </Link>
               <Link
                 to="/booking"
-                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-bold"
               >
                 الحجز
               </Link>
               <Link
                 to="/pricing"
-                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-bold"
               >
                 الأسعار
               </Link>
               <Link
                 to="/stations"
-                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-bold"
               >
                 المحطات
               </Link>
               <Link
                 to="/faq"
-                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-bold"
               >
                 الأسئلة الشائعة
               </Link>
