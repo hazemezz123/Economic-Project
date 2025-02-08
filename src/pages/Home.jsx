@@ -4,65 +4,65 @@ import { motion } from "framer-motion";
 function Home() {
   return (
     <div className="bg-white dark:bg-gray-900">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 bg-white dark:bg-gray-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-            <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 lg:mt-16 lg:px-8 xl:mt-20">
-              <div className="sm:text-center lg:text-right">
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl leading-tight"
-                >
-                  <span className="block">استأجر سكوتر كهربائي</span>
-                  <span className="block text-blue-600 dark:text-blue-400">
-                    في أي وقت وأي مكان
-                  </span>
-                </motion.h1>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="mt-3 text-base text-gray-500 dark:text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
-                >
-                  اكتشف حرية التنقل مع خدمة تأجير السكوتر الكهربائي. وسيلة نقل
-                  صديقة للبيئة وفعالة من حيث التكلفة.
-                </motion.p>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-end"
-                >
-                  <div className="rounded-md shadow">
-                    <Link
-                      to="/booking"
-                      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 md:py-4 md:text-lg md:px-10 transition-colors duration-200"
-                    >
-                      احجز الآن
-                    </Link>
-                  </div>
-                  <div className="mt-3 sm:mt-0 sm:mr-3">
-                    <Link
-                      to="/pricing"
-                      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-100 hover:bg-blue-200 dark:text-blue-400 dark:bg-blue-900 dark:hover:bg-blue-800 md:py-4 md:text-lg md:px-10 transition-colors duration-200"
-                    >
-                      تعرف على الأسعار
-                    </Link>
-                  </div>
-                </motion.div>
-              </div>
-            </main>
-          </div>
-        </div>
-        <div className="lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2">
+      {/* Hero Section with Dark Overlay */}
+      <div className="relative h-screen">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
           <img
-            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+            className="w-full h-full object-cover"
             src="/LandingImg.png"
             alt="Electric Scooter"
           />
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 h-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+            <div className="text-center md:text-right w-full">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl leading-tight"
+              >
+                <span className="block">استأجر سكوتر كهربائي</span>
+                <span className="block text-[#f99026]">في أي وقت وأي مكان</span>
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="mt-3 text-base text-gray-200 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
+              >
+                اكتشف حرية التنقل مع خدمة تأجير السكوتر الكهربائي. وسيلة نقل
+                صديقة للبيئة وفعالة من حيث التكلفة.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="mt-5 sm:mt-8 sm:flex sm:justify-center md:justify-end"
+              >
+                <div className="rounded-md shadow">
+                  <Link
+                    to="/booking"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#f99026] hover:bg-[#e07d15] md:py-4 md:text-lg md:px-10 transition-colors duration-200"
+                  >
+                    احجز الآن
+                  </Link>
+                </div>
+                <div className="mt-3 sm:mt-0 sm:mr-3">
+                  <Link
+                    to="/pricing"
+                    className="w-full flex items-center justify-center px-8 py-3 border-2 border-[#f99026] text-base font-medium rounded-md text-white hover:bg-[#f99026] hover:bg-opacity-10 md:py-4 md:text-lg md:px-10 transition-colors duration-200"
+                  >
+                    تعرف على الأسعار
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -80,11 +80,12 @@ function Home() {
 
           <div className="mt-10">
             <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Feature Cards */}
               <motion.div whileHover={{ scale: 1.05 }} className="pt-6">
-                <div className="flow-root bg-white dark:bg-gray-900 rounded-lg px-6 pb-8">
+                <div className="flow-root bg-white dark:bg-gray-900 rounded-lg px-6 pb-8 h-full border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
                   <div className="-mt-6">
                     <div>
-                      <span className="inline-flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-600 rounded-md shadow-lg">
+                      <span className="inline-flex items-center justify-center p-3 bg-[#f99026] rounded-md shadow-lg">
                         <svg
                           className="h-6 w-6 text-white"
                           fill="none"
@@ -111,11 +112,12 @@ function Home() {
                 </div>
               </motion.div>
 
+              {/* Feature 2 */}
               <motion.div whileHover={{ scale: 1.05 }} className="pt-6">
-                <div className="flow-root bg-white dark:bg-gray-900 rounded-lg px-6 pb-8">
+                <div className="flow-root bg-white dark:bg-gray-900 rounded-lg px-6 pb-8 h-full border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
                   <div className="-mt-6">
                     <div>
-                      <span className="inline-flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-600 rounded-md shadow-lg">
+                      <span className="inline-flex items-center justify-center p-3 bg-[#f99026] rounded-md shadow-lg">
                         <svg
                           className="h-6 w-6 text-white"
                           fill="none"
@@ -141,11 +143,12 @@ function Home() {
                 </div>
               </motion.div>
 
+              {/* Feature 3 */}
               <motion.div whileHover={{ scale: 1.05 }} className="pt-6">
-                <div className="flow-root bg-white dark:bg-gray-900 rounded-lg px-6 pb-8">
+                <div className="flow-root bg-white dark:bg-gray-900 rounded-lg px-6 pb-8 h-full border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
                   <div className="-mt-6">
                     <div>
-                      <span className="inline-flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-600 rounded-md shadow-lg">
+                      <span className="inline-flex items-center justify-center p-3 bg-[#f99026] rounded-md shadow-lg">
                         <svg
                           className="h-6 w-6 text-white"
                           fill="none"
@@ -201,12 +204,11 @@ function Home() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <div className="bg-blue-50 dark:bg-gray-800 p-6 rounded-lg">
+              {/* Vision Card */}
+              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
                 <div className="flex items-center mb-3">
                   <span className="text-2xl mr-2">✨</span>
-                  <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">
-                    رؤيتنا
-                  </h3>
+                  <h3 className="text-xl font-bold text-[#f99026]">رؤيتنا</h3>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   نكون الحل الأول والمفضل للتنقل السهل والسريع في المدينة،
@@ -215,18 +217,17 @@ function Home() {
                 </p>
               </div>
 
+              {/* Goal Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 viewport={{ once: true }}
-                className="bg-green-50 dark:bg-gray-800 p-6 rounded-lg"
+                className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200"
               >
                 <div className="flex items-center mb-3">
                   <span className="text-2xl mr-2">🎯</span>
-                  <h3 className="text-xl font-bold text-green-600 dark:text-green-400">
-                    هدفنا
-                  </h3>
+                  <h3 className="text-xl font-bold text-[#f99026]">هدفنا</h3>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   نوفر تجربة تأجير سكوتر ودراجات سهلة وآمنة من خلال تقنية QR
@@ -235,45 +236,54 @@ function Home() {
                 </p>
               </motion.div>
 
+              {/* Values Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-purple-50 dark:bg-gray-800 p-6 rounded-lg"
+                className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200"
               >
                 <div className="flex items-center mb-3">
                   <span className="text-2xl mr-2">🛡</span>
-                  <h3 className="text-xl font-bold text-purple-600 dark:text-purple-400">
-                    قيمنا
-                  </h3>
+                  <h3 className="text-xl font-bold text-[#f99026]">قيمنا</h3>
                 </div>
                 <ul className="space-y-4 text-gray-700 dark:text-gray-300">
                   <li className="flex items-start">
-                    <span className="font-bold ml-2">السهولة:</span>
+                    <span className="font-bold ml-2 text-[#f99026]">
+                      السهولة:
+                    </span>
                     <span>نخلي كل حاجة بسيطة، من الحجز لركوب السكوتر.</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="font-bold ml-2">الأمان:</span>
+                    <span className="font-bold ml-2 text-[#f99026]">
+                      الأمان:
+                    </span>
                     <span>
                       نضمن إن كل السكوترات بحالة ممتازة، ونضيف إجراءات تحافظ على
                       سلامة المستخدمين.
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="font-bold ml-2">الاستدامة:</span>
+                    <span className="font-bold ml-2 text-[#f99026]">
+                      الاستدامة:
+                    </span>
                     <span>
                       نساعد في تقليل التلوث والزحمة ببدائل تنقل صديقة للبيئة.
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="font-bold ml-2">الموثوقية:</span>
+                    <span className="font-bold ml-2 text-[#f99026]">
+                      الموثوقية:
+                    </span>
                     <span>
                       نقدم خدمة محترفة وسريعة، ونكون دايمًا متاحين للدعم.
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="font-bold ml-2">الابتكار:</span>
+                    <span className="font-bold ml-2 text-[#f99026]">
+                      الابتكار:
+                    </span>
                     <span>
                       نستخدم أحدث التقنيات عشان نخلي التجربة أسرع وأسهل
                       للمستخدمين.
@@ -283,6 +293,7 @@ function Home() {
               </motion.div>
             </motion.div>
 
+            {/* Image and Stats Section */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -298,12 +309,13 @@ function Home() {
                 />
               </div>
 
+              {/* Stats */}
               <motion.div
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
                 viewport={{ once: true }}
-                className="absolute -bottom-6 -left-6 bg-blue-600 dark:bg-blue-500 text-white p-6 rounded-lg shadow-lg"
+                className="absolute -bottom-6 -left-6 bg-[#f99026] text-white p-6 rounded-lg shadow-lg"
               >
                 <div className="text-4xl font-bold mb-2">+1000</div>
                 <div className="text-sm">مستخدم نشط شهرياً</div>
@@ -314,7 +326,7 @@ function Home() {
                 whileInView={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 1 }}
                 viewport={{ once: true }}
-                className="absolute -top-6 -right-6 bg-green-600 dark:bg-green-500 text-white p-6 rounded-lg shadow-lg"
+                className="absolute -top-6 -right-6 bg-[#f99026] text-white p-6 rounded-lg shadow-lg"
               >
                 <div className="text-4xl font-bold mb-2">3</div>
                 <div className="text-sm">محطات في القاهرة</div>
@@ -330,32 +342,27 @@ function Home() {
             viewport={{ once: true }}
             className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-              <div className="text-blue-600 dark:text-blue-400 text-4xl font-bold mb-2">
-                98%
-              </div>
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
+              <div className="text-[#f99026] text-4xl font-bold mb-2">98%</div>
               <div className="text-gray-600 dark:text-gray-300">
                 نسبة رضا العملاء
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-              <div className="text-green-600 dark:text-green-400 text-4xl font-bold mb-2">
-                24/7
-              </div>
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
+              <div className="text-[#f99026] text-4xl font-bold mb-2">24/7</div>
               <div className="text-gray-600 dark:text-gray-300">
                 دعم فني متواصل
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-              <div className="text-purple-600 dark:text-purple-400 text-4xl font-bold mb-2">
-                100%
-              </div>
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
+              <div className="text-[#f99026] text-4xl font-bold mb-2">100%</div>
               <div className="text-gray-600 dark:text-gray-300">
                 تأمين على الرحلات
               </div>
             </div>
           </motion.div>
 
+          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -365,7 +372,7 @@ function Home() {
           >
             <Link
               to="/stations"
-              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors duration-200"
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#f99026] hover:bg-[#e07d15] transition-colors duration-200"
             >
               تعرف على محطاتنا
               <svg

@@ -42,128 +42,222 @@ function Pricing() {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <motion.h2
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-extrabold text-gray-900 sm:text-4xl"
+            className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
           >
-            أسعار مناسبة للجميع
-          </motion.h2>
+            خطط الأسعار المرنة
+          </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-4 text-xl text-gray-600"
+            className="mt-4 text-xl text-gray-600 dark:text-gray-300"
           >
-            اختر الباقة التي تناسب احتياجاتك
+            اختر الخطة التي تناسب احتياجاتك
           </motion.p>
         </div>
 
-        <div className="mt-16 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
-          {plans.map((plan, index) => (
+        <div className="mt-12">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Hourly Plan */}
             <motion.div
-              key={plan.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-              className={`relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col ${
-                plan.featured ? "ring-2 ring-blue-500" : ""
-              }`}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
             >
-              {plan.featured && (
-                <span className="absolute top-0 right-6 -translate-y-1/2 transform rounded-full bg-blue-500 px-4 py-1 text-sm font-semibold text-white">
-                  الأكثر شعبية
-                </span>
-              )}
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900">
-                  {plan.name}
+              <div className="px-6 py-8">
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+                  بالساعة
                 </h3>
-                <p className="mt-4 flex items-baseline text-gray-900">
-                  <span className="text-5xl font-extrabold tracking-tight">
-                    {plan.price}
+                <div className="mt-4 flex justify-center">
+                  <span className="text-5xl font-extrabold text-[#f99026]">
+                    50
                   </span>
-                  <span className="mr-1 text-xl font-semibold">ج.م</span>
-                  <span className="mr-1 text-xl text-gray-500">
-                    / {plan.unit}
+                  <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
+                    جنيه / ساعة
                   </span>
-                </p>
-                <p className="mt-6 text-gray-500">{plan.description}</p>
-
-                <ul className="mt-6 space-y-6">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex">
-                      <svg
-                        className="flex-shrink-0 w-6 h-6 text-blue-500"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span className="mr-3 text-gray-500">{feature}</span>
-                    </li>
-                  ))}
+                </div>
+                <ul className="mt-6 space-y-4">
+                  <li className="flex items-center">
+                    <svg
+                      className="h-5 w-5 text-[#f99026]"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="mr-3 text-gray-600 dark:text-gray-300">
+                      مرونة في الوقت
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      className="h-5 w-5 text-[#f99026]"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="mr-3 text-gray-600 dark:text-gray-300">
+                      تأمين شامل
+                    </span>
+                  </li>
                 </ul>
+                <div className="mt-8">
+                  <Link
+                    to="/booking"
+                    className="block w-full bg-[#f99026] text-white text-center px-4 py-2 rounded-md hover:bg-[#e07d15] transition-colors duration-200"
+                  >
+                    احجز الآن
+                  </Link>
+                </div>
               </div>
-
-              <Link
-                to="/booking"
-                className={`mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium ${
-                  plan.featured
-                    ? "text-white bg-blue-600 hover:bg-blue-700"
-                    : "text-blue-600 bg-blue-50 hover:bg-blue-100"
-                }`}
-              >
-                احجز الآن
-              </Link>
             </motion.div>
-          ))}
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16 bg-white rounded-lg shadow-sm px-6 py-8"
-        >
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-            معلومات إضافية
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h4 className="text-lg font-medium text-gray-900 mb-4">
-                التأمين والضمان
-              </h4>
-              <ul className="space-y-3 text-gray-600">
-                <li>• تأمين ضد الحوادث والسرقة</li>
-                <li>• ضمان على البطارية والأعطال الفنية</li>
-                <li>• تغطية المساعدة على الطريق</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-medium text-gray-900 mb-4">
-                شروط الاستخدام
-              </h4>
-              <ul className="space-y-3 text-gray-600">
-                <li>• يجب أن يكون العمر 18 عاماً أو أكثر</li>
-                <li>• رخصة قيادة سارية</li>
-                <li>• بطاقة هوية سارية</li>
-              </ul>
-            </div>
+            {/* Per Kilometer Plan */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden border-2 border-[#f99026]"
+            >
+              <div className="px-6 py-8">
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+                  بالكيلومتر
+                </h3>
+                <div className="mt-4 flex justify-center">
+                  <span className="text-5xl font-extrabold text-[#f99026]">
+                    25
+                  </span>
+                  <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
+                    جنيه / كم
+                  </span>
+                </div>
+                <ul className="mt-6 space-y-4">
+                  <li className="flex items-center">
+                    <svg
+                      className="h-5 w-5 text-[#f99026]"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="mr-3 text-gray-600 dark:text-gray-300">
+                      ادفع حسب المسافة
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      className="h-5 w-5 text-[#f99026]"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="mr-3 text-gray-600 dark:text-gray-300">
+                      تأمين شامل
+                    </span>
+                  </li>
+                </ul>
+                <div className="mt-8">
+                  <Link
+                    to="/booking"
+                    className="block w-full bg-[#f99026] text-white text-center px-4 py-2 rounded-md hover:bg-[#e07d15] transition-colors duration-200"
+                  >
+                    احجز الآن
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Monthly Plan */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+            >
+              <div className="px-6 py-8">
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+                  اشتراك شهري
+                </h3>
+                <div className="mt-4 flex justify-center">
+                  <span className="text-5xl font-extrabold text-[#f99026]">
+                    1000
+                  </span>
+                  <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
+                    جنيه / شهر
+                  </span>
+                </div>
+                <ul className="mt-6 space-y-4">
+                  <li className="flex items-center">
+                    <svg
+                      className="h-5 w-5 text-[#f99026]"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="mr-3 text-gray-600 dark:text-gray-300">
+                      استخدام غير محدود
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      className="h-5 w-5 text-[#f99026]"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="mr-3 text-gray-600 dark:text-gray-300">
+                      تأمين شامل
+                    </span>
+                  </li>
+                </ul>
+                <div className="mt-8">
+                  <Link
+                    to="/booking"
+                    className="block w-full bg-[#f99026] text-white text-center px-4 py-2 rounded-md hover:bg-[#e07d15] transition-colors duration-200"
+                  >
+                    احجز الآن
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
