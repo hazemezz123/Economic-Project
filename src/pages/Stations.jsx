@@ -5,22 +5,23 @@ function Stations() {
   const stations = [
     {
       id: 1,
-      name: "محطة وسط البلد",
-      address: "ميدان التحرير، القاهرة",
+      name: "محطة بورتوفيق",
+      address: " بورتوفيق , امام حديقة الفرنساوي",
       workingHours: "24 ساعة",
       availableScooters: 15,
       features: ["موقف سيارات", "صيانة", "شحن بطاريات", "كاميرات مراقبة"],
-      image: "/stations/downtown.jpg",
+      image: "/stations/FranceGraden.png",
     },
     {
       id: 2,
-      name: "محطة المعادي",
-      address: "شارع 9، المعادي، القاهرة",
+      name: "محطة السويس",
+      address: "السلام 2 , بجوار الجامع الكبير",
       workingHours: "8 صباحاً - 11 مساءً",
       availableScooters: 10,
       features: ["موقف سيارات", "صيانة", "شحن بطاريات", "استراحة"],
-      image: "/stations/maadi.jpg",
+      image: "/stations/El_salam.jpg",
     },
+
     {
       id: 3,
       name: "محطة مدينة نصر",

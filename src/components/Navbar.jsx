@@ -17,8 +17,8 @@ function Navbar({ user, setUser }) {
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex">
+        <div className="flex justify-between items-center h-16  ">
+          <div className="flex transition-colors duration-300">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <motion.img
                 whileHover={{ scale: 1.1 }}
