@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
+  const [showSupport, setShowSupport] = useState(false);
 
   const faqs = [
     {
@@ -48,47 +49,40 @@ function FAQ() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
           className="text-center"
         >
-          <h2 className="text-3xl font-extrabold text-gray-900">
+          <h2 className="text-3xl font-extrabold text-orange-500 dark:text-orange-400">
             الأسئلة الشائعة
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
             إجابات على الأسئلة الأكثر شيوعاً حول خدمة تأجير السكوتر الكهربائي
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-12 space-y-6"
-        >
+        <div className="mt-12 space-y-6">
           {faqs.map((faq, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white shadow-sm rounded-lg overflow-hidden"
+              className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 cursor-pointer"
             >
               <button
                 className="w-full px-6 py-4 text-right flex justify-between items-center focus:outline-none"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
-                <span className="text-lg font-medium text-gray-900">
+                <span className="text-lg font-medium text-gray-900 dark:text-white">
                   {faq.question}
                 </span>
-                <svg
-                  className={`w-5 h-5 text-gray-500 transform transition-transform duration-200 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
+                <motion.svg
+                  initial={false}
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-5 h-5 text-orange-500 dark:text-orange-400"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -99,51 +93,66 @@ function FAQ() {
                     strokeWidth={2}
                     d="M19 9l-7 7-7-7"
                   />
-                </svg>
+                </motion.svg>
               </button>
 
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="px-6 pb-4"
-                  >
-                    <p className="text-gray-600">{faq.answer}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              <motion.div
+                initial={false}
+                animate={{
+                  height: openIndex === index ? "auto" : 0,
+                  opacity: openIndex === index ? 1 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="px-6 pb-4">
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {faq.answer}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
+        <button
+          onClick={() => setShowSupport(!showSupport)}
+          className="mb-4 px-4 py-2 text-orange-500 dark:text-orange-400"
+        >
+          {showSupport ? "إخفاء الدعم" : "عرض الدعم"}
+        </button>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="mt-12 bg-blue-50 rounded-lg p-6 text-center"
+          initial={false}
+          animate={{
+            height: showSupport ? "auto" : 0,
+            opacity: showSupport ? 1 : 0,
+          }}
+          transition={{ duration: 0.3 }}
+          className="overflow-hidden mt-12"
         >
-          <h3 className="text-lg font-medium text-blue-900">
-            لم تجد إجابة لسؤالك؟
-          </h3>
-          <p className="mt-2 text-blue-700">
-            يمكنك التواصل مع فريق خدمة العملاء على مدار الساعة
-          </p>
-          <div className="mt-4 flex justify-center space-x-4">
-            <a
-              href="tel:+201234567890"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-            >
-              اتصل بنا
-            </a>
-            <a
-              href="mailto:support@scooter-rental.eg"
-              className="inline-flex items-center px-4 py-2 border border-blue-600 text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50"
-            >
-              راسلنا
-            </a>
+          <div className="bg-blue-50 dark:bg-gray-800 rounded-lg p-6 text-center">
+            <h3 className="text-lg font-medium text-orange-500 dark:text-white">
+              لم تجد إجابة لسؤالك؟
+            </h3>
+
+            <p className="mt-2 text-orange-500 dark:text-orange-400">
+              يمكنك التواصل مع فريق خدمة العملاء على مدار الساعة
+            </p>
+
+            <div className="mt-4 flex justify-center space-x-4">
+              <a
+                href="tel:+201234567890"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 dark:bg-orange-500 dark:hover:bg-orange-600"
+              >
+                اتصل بنا
+              </a>
+              <a
+                href="mailto:support@scooter-rental.eg"
+                className="inline-flex items-center px-4 py-2 border border-orange-500 text-sm font-medium rounded-md text-orange-500 dark:text-orange-400 bg-white dark:bg-gray-800 hover:bg-orange-50 dark:hover:bg-gray-700 dark:border-orange-500"
+              >
+                راسلنا
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>

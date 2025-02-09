@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import FormSelect from "../components/FormSelect";
+import FormInput from "../components/FormInput";
 
 function Booking({ user }) {
   const navigate = useNavigate();
@@ -18,13 +20,31 @@ function Booking({ user }) {
   const [showSupport, setShowSupport] = useState(false);
 
   const stations = [
-    { id: 1, name: "محطة  السلام", address: "" },
-    { id: 2, name: "محطة بورتوفيق", address: "" },
+    {
+      id: 1,
+      name: "محطة السلام",
+      address: "شارع السلام، حي السلام",
+    },
+    {
+      id: 2,
+      name: "محطة بورتوفيق",
+      address: "شارع 23 يوليو، بورتوفيق",
+    },
     {
       id: 3,
-      name: "محطة السويس",
-      address: "",
+      name: "محطة حديقة فرنسا",
+      address: "شارع الجيش، الأربعين",
     },
+  ];
+
+  const stationOptions = stations.map((station) => ({
+    value: station.id,
+    label: station.name,
+  }));
+
+  const rentalTypeOptions = [
+    { value: "hourly", label: "بالساعة" },
+    { value: "kilometer", label: "بالكيلومتر" },
   ];
 
   const handleInputChange = (e) => {
@@ -51,7 +71,7 @@ function Booking({ user }) {
   };
 
   const calculatePrice = () => {
-    const basePrice = formData.rentalType === "hourly" ? 50 : 25;
+    const basePrice = formData.rentalType === "hourly" ? 20 : 2;
     return basePrice * formData.duration;
   };
 
@@ -104,140 +124,67 @@ function Booking({ user }) {
               className="space-y-6 bg-white dark:bg-gray-800 shadow rounded-lg p-6"
             >
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {/* Pickup Station */}
-                <div>
-                  <label
-                    htmlFor="pickupStation"
-                    className="block text-sm font-bold dark:text-gray-200 text-gray-700 "
-                  >
-                    محطة الاستلام
-                  </label>
+                <FormSelect
+                  label="محطة الاستلام"
+                  name="pickupStation"
+                  value={formData.pickupStation}
+                  onChange={handleInputChange}
+                  required
+                  options={stationOptions}
+                  placeholder="اختر محطة"
+                />
 
-                  <select
-                    id="pickupStation"
-                    name="pickupStation"
-                    value={formData.pickupStation}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="">اختر محطة</option>
-                    {stations.map((station) => (
-                      <option key={station.id} value={station.id}>
-                        {station.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <FormSelect
+                  label="محطة التسليم"
+                  name="dropoffStation"
+                  value={formData.dropoffStation}
+                  onChange={handleInputChange}
+                  required
+                  options={stationOptions}
+                  placeholder="اختر محطة"
+                />
 
-                {/* Dropoff Station */}
-                <div>
-                  <label
-                    htmlFor="dropoffStation"
-                    className="block text-sm font-bold dark:text-gray-200 text-gray-700 "
-                  >
-                    محطة التسليم
-                  </label>
-                  <select
-                    id="dropoffStation"
-                    name="dropoffStation"
-                    value={formData.dropoffStation}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="">اختر محطة</option>
-                    {stations.map((station) => (
-                      <option key={station.id} value={station.id}>
-                        {station.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <FormSelect
+                  label="نوع الإيجار"
+                  name="rentalType"
+                  value={formData.rentalType}
+                  onChange={handleInputChange}
+                  required
+                  options={rentalTypeOptions}
+                />
 
-                {/* Rental Type */}
-                <div>
-                  <label
-                    htmlFor="rentalType"
-                    className="block text-sm  text-gray-700 font-bold dark:text-gray-200"
-                  >
-                    نوع التأجير
-                  </label>
-                  <select
-                    id="rentalType"
-                    name="rentalType"
-                    value={formData.rentalType}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="hourly">بالساعة</option>
-                    <option value="kilometer">بالكيلومتر</option>
-                  </select>
-                </div>
-
-                {/* Duration */}
-                <div>
-                  <label
-                    htmlFor="duration"
-                    className="block text-sm font-bold dark:text-gray-200 text-gray-700 "
-                  >
-                    {formData.rentalType === "hourly"
+                <FormInput
+                  label={
+                    formData.rentalType === "hourly"
                       ? "عدد الساعات"
-                      : "عدد الكيلومترات"}
-                  </label>
-                  <input
-                    type="number"
-                    id="duration"
-                    name="duration"
-                    min="1"
-                    value={formData.duration}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
+                      : "عدد الكيلومترات"
+                  }
+                  name="duration"
+                  type="number"
+                  min="1"
+                  value={formData.duration}
+                  onChange={handleInputChange}
+                  required
+                />
 
-                {/* Date */}
-                <div>
-                  <label
-                    htmlFor="date"
-                    className="block text-sm font-bold dark:text-gray-200 text-gray-700 "
-                  >
-                    التاريخ
-                  </label>
+                <FormInput
+                  label="التاريخ"
+                  name="date"
+                  type="date"
+                  value={formData.date}
+                  onChange={handleInputChange}
+                  required
+                  min={new Date().toISOString().split("T")[0]}
+                />
 
-                  <input
-                    type="date"
-                    id="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleInputChange}
-                    required
-                    min={new Date().toISOString().split("T")[0]}
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-
-                {/* Time */}
-                <div>
-                  <label
-                    htmlFor="time"
-                    className="block text-sm font-bold dark:text-gray-200 text-gray-700 "
-                  >
-                    الوقت
-                  </label>
-
-                  <input
-                    type="time"
-                    id="time"
-                    name="time"
-                    value={formData.time}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
+                <FormInput
+                  label="الوقت"
+                  name="time"
+                  type="time"
+                  value={formData.time}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               {/* ID Card Upload Section */}
@@ -259,7 +206,7 @@ function Booking({ user }) {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleCameraClick}
-                    className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f99026]"
                   >
                     <svg
                       className="mr-2 h-5 w-5 text-gray-400"
@@ -294,7 +241,7 @@ function Booking({ user }) {
                     animate={{ opacity: 1, scale: 1 }}
                     className="mt-4"
                   >
-                    <div className="relative rounded-lg overflow-hidden border-2 border-blue-500 dark:border-blue-400">
+                    <div className="relative rounded-lg overflow-hidden border-2 border-[#f99026] dark:border-[#f99026]">
                       <img
                         src={idCardImage}
                         alt="معاينة البطاقة الشخصية"
@@ -331,8 +278,8 @@ function Booking({ user }) {
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-300 mt-1">
                   {formData.rentalType === "hourly"
-                    ? "السعر 50 جنيه مصري للساعة"
-                    : "السعر 25 جنيه مصري للكيلومتر"}
+                    ? "السعر 20 جنيه مصري للساعة"
+                    : "السعر 2 جنيه مصري للكيلومتر"}
                 </p>
               </div>
 
@@ -342,13 +289,12 @@ function Booking({ user }) {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#f99026] hover:bg-[#e07d15] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f99026] transition-colors duration-200"
                 >
                   تأكيد الحجز
                 </motion.button>
               </div>
             </form>
-
             {/* Contact Support Section */}
             <div className="mt-8 bg-white dark:bg-gray-800 shadow rounded-lg p-6">
               <div
@@ -359,7 +305,7 @@ function Booking({ user }) {
                   تحتاج مساعدة؟
                 </h2>
                 <svg
-                  className={`h-6 w-6 transform transition-transform ${
+                  className={`h-6 w-6 transform transition-transform dark:text-white ${
                     showSupport ? "rotate-180" : ""
                   }`}
                   fill="none"
@@ -387,7 +333,7 @@ function Booking({ user }) {
                 <div className="mt-4 space-y-4">
                   <div className="flex items-center">
                     <svg
-                      className="h-6 w-6 text-blue-500"
+                      className="h-6 w-6 text-[#f99026]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -406,7 +352,7 @@ function Booking({ user }) {
 
                   <div className="flex items-center">
                     <svg
-                      className="h-6 w-6 text-blue-500"
+                      className="h-6 w-6 text-[#f99026]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -425,7 +371,7 @@ function Booking({ user }) {
 
                   <div className="flex items-center">
                     <svg
-                      className="h-6 w-6 text-blue-500"
+                      className="h-6 w-6 text-[#f99026]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

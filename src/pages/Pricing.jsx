@@ -4,40 +4,26 @@ import { Link } from "react-router-dom";
 function Pricing() {
   const plans = [
     {
-      name: "الباقة الأساسية",
+      name: "الباقة بالساعة",
       description: "مناسبة للرحلات القصيرة",
-      price: "50",
+      price: "20",
       unit: "ساعة",
-      features: ["سكوتر كهربائي حديث", "تأمين أساسي", "خوذة واقية", "دعم فني"],
+      features: ["مرونة في الوقت", "تأمين شامل", "خوذة واقية"],
     },
     {
-      name: "باقة المسافات",
-      description: "مناسبة للرحلات الطويلة",
-      price: "25",
+      name: "الباقة بالكيلومتر",
+      description: "ادفع حسب المسافة",
+      price: "2",
       unit: "كم",
-      features: [
-        "سكوتر كهربائي حديث",
-        "تأمين شامل",
-        "خوذة واقية",
-        "دعم فني على مدار الساعة",
-        "خدمة المساعدة على الطريق",
-      ],
+      features: ["ادفع حسب المسافة", "تأمين شامل", "خوذة واقية"],
       featured: true,
     },
     {
-      name: "الباقة الشهرية",
+      name: "الباقة اليومية",
       description: "مناسبة للاستخدام المنتظم",
-      price: "1000",
-      unit: "شهر",
-      features: [
-        "سكوتر كهربائي حديث",
-        "تأمين شامل",
-        "خوذة واقية",
-        "دعم فني على مدار الساعة",
-        "خدمة المساعدة على الطريق",
-        "صيانة مجانية",
-        "استبدال البطارية مجاناً",
-      ],
+      price: "75",
+      unit: "يومي",
+      features: ["استخدام غير محدود", "تأمين شامل", "خوذة واقية"],
     },
   ];
 
@@ -65,199 +51,148 @@ function Pricing() {
 
         <div className="mt-12">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Hourly Plan */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
-            >
-              <div className="px-6 py-8">
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
-                  بالساعة
-                </h3>
-                <div className="mt-4 flex justify-center">
-                  <span className="text-5xl font-extrabold text-[#f99026]">
-                    50
-                  </span>
-                  <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
-                    جنيه / ساعة
-                  </span>
-                </div>
-                <ul className="mt-6 space-y-4">
-                  <li className="flex items-center">
-                    <svg
-                      className="h-5 w-5 text-[#f99026]"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="mr-3 text-gray-600 dark:text-gray-300">
-                      مرونة في الوقت
+            {plans.map((plan, index) => (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden ${
+                  plan.featured ? "border-2 border-[#f99026]" : ""
+                }`}
+              >
+                <div className="px-6 py-8">
+                  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+                    {plan.name}
+                  </h3>
+                  <p className="mt-2 text-gray-500 dark:text-gray-400 text-center">
+                    {plan.description}
+                  </p>
+                  <div className="mt-4 flex justify-center">
+                    <span className="text-5xl font-extrabold text-[#f99026]">
+                      {plan.price}
                     </span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg
-                      className="h-5 w-5 text-[#f99026]"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="mr-3 text-gray-600 dark:text-gray-300">
-                      تأمين شامل
+                    <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
+                      جنيه / {plan.unit}
                     </span>
-                  </li>
-                </ul>
-                <div className="mt-8">
-                  <Link
-                    to="/booking"
-                    className="block w-full bg-[#f99026] text-white text-center px-4 py-2 rounded-md hover:bg-[#e07d15] transition-colors duration-200"
-                  >
-                    احجز الآن
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Per Kilometer Plan */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden border-2 border-[#f99026]"
-            >
-              <div className="px-6 py-8">
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
-                  بالكيلومتر
-                </h3>
-                <div className="mt-4 flex justify-center">
-                  <span className="text-5xl font-extrabold text-[#f99026]">
-                    25
-                  </span>
-                  <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
-                    جنيه / كم
-                  </span>
-                </div>
-                <ul className="mt-6 space-y-4">
-                  <li className="flex items-center">
-                    <svg
-                      className="h-5 w-5 text-[#f99026]"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                  </div>
+                  <ul className="mt-6 space-y-4">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <svg
+                          className="h-5 w-5 text-[#f99026]"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span className="mr-3 text-gray-600 dark:text-gray-300">
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-8">
+                    <Link
+                      to="/booking"
+                      className="block w-full bg-[#f99026] text-white text-center px-4 py-2 rounded-md hover:bg-[#e07d15] transition-colors duration-200"
                     >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="mr-3 text-gray-600 dark:text-gray-300">
-                      ادفع حسب المسافة
-                    </span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg
-                      className="h-5 w-5 text-[#f99026]"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="mr-3 text-gray-600 dark:text-gray-300">
-                      تأمين شامل
-                    </span>
-                  </li>
-                </ul>
-                <div className="mt-8">
-                  <Link
-                    to="/booking"
-                    className="block w-full bg-[#f99026] text-white text-center px-4 py-2 rounded-md hover:bg-[#e07d15] transition-colors duration-200"
-                  >
-                    احجز الآن
-                  </Link>
+                      احجز الآن
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-
-            {/* Monthly Plan */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
-            >
-              <div className="px-6 py-8">
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
-                  اشتراك شهري
-                </h3>
-                <div className="mt-4 flex justify-center">
-                  <span className="text-5xl font-extrabold text-[#f99026]">
-                    1000
-                  </span>
-                  <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
-                    جنيه / شهر
-                  </span>
-                </div>
-                <ul className="mt-6 space-y-4">
-                  <li className="flex items-center">
-                    <svg
-                      className="h-5 w-5 text-[#f99026]"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="mr-3 text-gray-600 dark:text-gray-300">
-                      استخدام غير محدود
-                    </span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg
-                      className="h-5 w-5 text-[#f99026]"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="mr-3 text-gray-600 dark:text-gray-300">
-                      تأمين شامل
-                    </span>
-                  </li>
-                </ul>
-                <div className="mt-8">
-                  <Link
-                    to="/booking"
-                    className="block w-full bg-[#f99026] text-white text-center px-4 py-2 rounded-md hover:bg-[#e07d15] transition-colors duration-200"
-                  >
-                    احجز الآن
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
+
+        {/* Additional Information Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8"
+        >
+          <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+            معلومات إضافية
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                التأمين والضمان
+              </h4>
+              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
+                <li className="flex items-center">
+                  <svg
+                    className="h-5 w-5 text-[#f99026] ml-2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  تأمين ضد الحوادث والسرقة
+                </li>
+                <li className="flex items-center">
+                  <svg
+                    className="h-5 w-5 text-[#f99026] ml-2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  ضمان على البطارية والأعطال الفنية
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                شروط الاستخدام
+              </h4>
+              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
+                <li className="flex items-center">
+                  <svg
+                    className="h-5 w-5 text-[#f99026] ml-2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  يجب أن يكون العمر 16 عاماً أو أكثر
+                </li>
+                <li className="flex items-center">
+                  <svg
+                    className="h-5 w-5 text-[#f99026] ml-2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  بطاقة هوية سارية
+                </li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

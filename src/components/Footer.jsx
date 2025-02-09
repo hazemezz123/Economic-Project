@@ -45,8 +45,8 @@ function Footer() {
               <li className="text-gray-300">
                 <span className="font-semibold">العنوان:</span> القاهرة، مصر
               </li>
-              <li className="text-gray-300">
-                <span className="font-semibold">الهاتف:</span> +20 123 456 7890
+              <li className="text-gray-300" style={{ direction: "ltr" }}>
+                <span className="font-semibold">الهاتف:</span> +20 100 52 91205
               </li>
               <li className="text-gray-300">
                 <span className="font-semibold">البريد الإلكتروني:</span>{" "}
@@ -117,8 +117,7 @@ function Footer() {
 
         <div className="mt-8 border-t border-gray-700 pt-8">
           <p className="text-center text-gray-400">
-            © {new Date().getFullYear()} خدمة تأجير السكوتر الكهربائي. جميع
-            الحقوق محفوظة.
+            © {new Date().getFullYear()} جميع الحقوق محفوظة لدي شركة Speed You
           </p>
         </div>
       </div>

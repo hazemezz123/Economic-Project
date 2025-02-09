@@ -16,7 +16,10 @@ function Navbar({ user, setUser }) {
 
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className="maContinue - Codestral, Claude, and more
+x-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div className="flex justify-between items-center h-16  ">
           <div className="flex transition-colors duration-300">
             <Link to="/" className="flex-shrink-0 flex items-center">
@@ -81,13 +84,13 @@ function Navbar({ user, setUser }) {
               <div className="flex items-center mr-4">
                 <Link
                   to="/login"
-                  className="btn-secondary dark:bg-gray-700 dark:text-gray-100 ml-4"
+                  className="btn-secondary dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100 ml-4"
                 >
                   تسجيل الدخول
                 </Link>
                 <Link
                   to="/register"
-                  className="btn-primary dark:bg-blue-700 dark:hover:bg-blue-800"
+                  className="btn-primary bg-orange-400 hover:bg-orange-500"
                 >
                   إنشاء حساب
                 </Link>

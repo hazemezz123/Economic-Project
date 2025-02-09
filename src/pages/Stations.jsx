@@ -110,30 +110,30 @@ function Stations() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16 bg-white rounded-lg shadow-sm px-6 py-8"
+          className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-sm px-6 py-8"
         >
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+          <h3 className="text-2xl  text-gray-900 mb-6 dark:text-white font-bold">
             معلومات مهمة
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h4 className="text-lg font-medium text-gray-900 mb-4">
+              <h4 className="text-lg font-medium text-gray-900 mb-4 dark:text-white">
                 قواعد استلام السكوتر
               </h4>
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                 <li>• إحضار بطاقة الهوية الشخصية</li>
                 <li>• توقيع عقد الإيجار</li>
                 <li>• دفع التأمين المسترد</li>
               </ul>
             </div>
             <div>
-              <h4 className="text-lg font-medium text-gray-900 mb-4">
+              <h4 className="text-lg font-medium text-gray-900 mb-4 dark:text-white">
                 قواعد تسليم السكوتر
               </h4>
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                 <li>• فحص حالة السكوتر</li>
                 <li>• التأكد من شحن البطارية</li>
-                <li>• استرداد مبلغ التأمين</li>
+                <li>• وضع الاسكوتر في مكان الشحن المخصص له </li>
               </ul>
             </div>
           </div>
