@@ -111,7 +111,7 @@ function Home() {
                   scale: 1.05,
                   boxShadow: "0 10px 30px -10px rgba(249, 144, 38, 0.4)",
                 }}
-                className="relative bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-[#f99026] transition-all duration-300"
+                className="relative bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-[#f99026]"
               >
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2">
                   <motion.div
@@ -153,7 +153,7 @@ function Home() {
                   scale: 1.05,
                   boxShadow: "0 10px 30px -10px rgba(249, 144, 38, 0.4)",
                 }}
-                className="relative bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-[#f99026] transition-all duration-300"
+                className="relative bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-[#f99026]"
               >
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2">
                   <motion.div
@@ -190,12 +190,12 @@ function Home() {
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 10px 30px -10px rgba(249, 144, 38, 0.4)",
                 }}
-                className="relative bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-[#f99026] transition-all duration-300"
+                className="relative bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-[#f99026] "
               >
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2">
                   <motion.div
@@ -412,30 +412,96 @@ function Home() {
       </div>
 
       {/* Additional Stats Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-        viewport={{ once: true }}
-        className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-      >
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
-          <div className="text-[#f99026] text-4xl font-bold mb-2">98%</div>
-          <div className="text-gray-600 dark:text-gray-300">
-            نسبة رضا العملاء
-          </div>
-        </div>
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
-          <div className="text-[#f99026] text-4xl font-bold mb-2">24/7</div>
-          <div className="text-gray-600 dark:text-gray-300">دعم فني متواصل</div>
-        </div>
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-colors duration-200">
-          <div className="text-[#f99026] text-4xl font-bold mb-2">100%</div>
-          <div className="text-gray-600 dark:text-gray-300">
-            تأمين على الرحلات
-          </div>
-        </div>
-      </motion.div>
+      <div className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8"
+        >
+          {/* Stat Card 1 */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-all duration-300 transform hover:shadow-2xl"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+              className="bg-gradient-to-r from-[#f99026] to-[#e07d15] w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
+            >
+              <span className="text-2xl text-white">🎯</span>
+            </motion.div>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-4xl font-bold text-[#f99026] mb-2"
+            >
+              98%
+            </motion.div>
+            <div className="text-gray-600 dark:text-gray-300 font-medium">
+              نسبة رضا العملاء
+            </div>
+          </motion.div>
+
+          {/* Stat Card 2 */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-all duration-300 transform hover:shadow-2xl"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+              className="bg-gradient-to-r from-[#f99026] to-[#e07d15] w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
+            >
+              <span className="text-2xl text-white">⏰</span>
+            </motion.div>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl font-bold text-[#f99026] mb-2"
+            >
+              24/7
+            </motion.div>
+            <div className="text-gray-600 dark:text-gray-300 font-medium ">
+              دعم فني متواصل
+            </div>
+          </motion.div>
+
+          {/* Stat Card 3 */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-all duration-300 transform hover:shadow-2xl sm:col-span-2 md:col-span-1"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, delay: 0.3 }}
+              className="bg-gradient-to-r from-[#f99026] to-[#e07d15] w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
+            >
+              <span className="text-2xl text-white">🛡️</span>
+            </motion.div>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-4xl font-bold text-[#f99026] mb-2"
+            >
+              100%
+            </motion.div>
+            <div className="text-gray-600 dark:text-gray-300 font-medium">
+              تأمين على الرحلات
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
 
       {/* CTA Button */}
       <motion.div
@@ -447,7 +513,7 @@ function Home() {
       >
         <Link
           to="/stations"
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#f99026] hover:bg-[#e07d15] transition-colors duration-200"
+          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#f99026] hover:bg-[#e07d15] transition-colors duration-200 mb-7"
         >
           تعرف على محطاتنا
           <svg

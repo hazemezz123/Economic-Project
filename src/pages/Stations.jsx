@@ -29,57 +29,129 @@ function Stations() {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
+    },
+  };
+
+  const imageVariants = {
+    hover: {
+      scale: 1.05,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen bg-gray-50 dark:bg-gray-900 py-25"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200 }}
             className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
           >
             محطاتنا
           </motion.h1>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "100px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="h-1 bg-[#f99026] mx-auto mt-4 mb-6"
+          />
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
             className="mt-4 text-xl text-gray-600 dark:text-gray-300"
           >
             اعثر على أقرب محطة إليك
           </motion.p>
-        </div>
+        </motion.div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {stations.map((station, index) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {stations.map((station) => (
             <motion.div
               key={station.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              variants={cardVariants}
+              whileHover={{
+                y: -10,
+                transition: { type: "spring", stiffness: 300 },
+              }}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-colors duration-300"
             >
-              <div className="relative h-48">
+              <motion.div
+                className="relative h-48"
+                variants={imageVariants}
+                whileHover="hover"
+              >
                 <img
                   src={station.image}
                   alt={station.name}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 left-4">
+                <motion.div
+                  initial={{ x: -100 }}
+                  animate={{ x: 0 }}
+                  transition={{ type: "spring", stiffness: 100 }}
+                  className="absolute top-4 left-4"
+                >
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#f99026] text-white">
                     {station.availableScooters} سكوتر متاح
                   </span>
-                </div>
-              </div>
-              <div className="p-6">
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="p-6"
+              >
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                   {station.name}
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   {station.address}
                 </p>
-                <div className="mt-4 flex items-center text-[#f99026]">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="mt-4 flex items-center text-[#f99026]"
+                >
                   <svg
                     className="h-5 w-5"
                     fill="none"
@@ -94,52 +166,101 @@ function Stations() {
                   <span className="mr-2 text-sm font-medium">
                     ساعات العمل: {station.workingHours}
                   </span>
-                </div>
-                <Link
-                  to="/booking"
-                  className="mt-6 block w-full bg-[#f99026] text-white py-2 px-4 rounded-md hover:bg-[#e07d15] transition-colors duration-200 text-center"
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  احجز من هذه المحطة
-                </Link>
-              </div>
+                  <Link
+                    to="/booking"
+                    className="mt-6 block w-full bg-[#f99026] text-white py-2 px-4 rounded-md hover:bg-[#e07d15] transition-all duration-300 text-center"
+                  >
+                    احجز من هذه المحطة
+                  </Link>
+                </motion.div>
+              </motion.div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-sm px-6 py-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 100 }}
+          viewport={{ once: true }}
+          className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-lg px-6 py-8"
         >
-          <h3 className="text-2xl  text-gray-900 mb-6 dark:text-white font-bold">
+          <motion.h3
+            initial={{ x: -20 }}
+            whileInView={{ x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-2xl text-gray-900 mb-6 dark:text-white font-bold"
+          >
             معلومات مهمة
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
+          </motion.h3>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            <div className="p-6 rounded-lg ">
               <h4 className="text-lg font-medium text-gray-900 mb-4 dark:text-white">
                 قواعد استلام السكوتر
               </h4>
-              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
-                <li>• إحضار بطاقة الهوية الشخصية</li>
-                <li>• توقيع عقد الإيجار</li>
-                <li>• دفع التأمين المسترد</li>
-              </ul>
+              <motion.ul
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1 }}
+                className="space-y-3 text-gray-600 dark:text-gray-300"
+              >
+                {[
+                  "إحضار بطاقة الهوية الشخصية",
+                  "توقيع عقد الإيجار",
+                  "دفع التأمين المسترد",
+                ].map((rule, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ x: -20, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    • {rule}
+                  </motion.li>
+                ))}
+              </motion.ul>
             </div>
-            <div>
+
+            <div className="p-6 rounded-lg ">
               <h4 className="text-lg font-medium text-gray-900 mb-4 dark:text-white">
                 قواعد تسليم السكوتر
               </h4>
-              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
-                <li>• فحص حالة السكوتر</li>
-                <li>• التأكد من شحن البطارية</li>
-                <li>• وضع الاسكوتر في مكان الشحن المخصص له </li>
-              </ul>
+              <motion.ul
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1 }}
+                className="space-y-3 text-gray-600 dark:text-gray-300"
+              >
+                {[
+                  "فحص حالة السكوتر",
+                  "التأكد من شحن البطارية",
+                  "وضع الاسكوتر في مكان الشحن المخصص له ",
+                ].map((rule, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ x: -20, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    • {rule}
+                  </motion.li>
+                ))}
+              </motion.ul>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

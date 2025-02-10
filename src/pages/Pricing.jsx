@@ -9,6 +9,7 @@ function Pricing() {
       price: "20",
       unit: "ساعة",
       features: ["مرونة في الوقت", "تأمين شامل", "خوذة واقية"],
+      availableScooters: "متوفر",
     },
     {
       name: "الباقة بالكيلومتر",
@@ -17,6 +18,7 @@ function Pricing() {
       unit: "كم",
       features: ["ادفع حسب المسافة", "تأمين شامل", "خوذة واقية"],
       featured: true,
+      availableScooters: "متوفر",
     },
     {
       name: "الباقة اليومية",
@@ -24,177 +26,227 @@ function Pricing() {
       price: "75",
       unit: "يومي",
       features: ["استخدام غير محدود", "تأمين شامل", "خوذة واقية"],
+      availableScooters: "متوفر",
     },
   ];
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
+    },
+  };
+
+  const imageVariants = {
+    hover: {
+      scale: 1.05,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen bg-gray-50 dark:bg-gray-900 py-25"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200 }}
             className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
           >
             خطط الأسعار المرنة
           </motion.h1>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "100px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="h-1 bg-[#f99026] mx-auto mt-4 mb-6"
+          />
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
             className="mt-4 text-xl text-gray-600 dark:text-gray-300"
           >
-            اختر الخطة التي تناسب احتياجاتك
+            اختار الخطة اللي بتناسب احتياجاتك
           </motion.p>
-        </div>
+        </motion.div>
 
-        <div className="mt-12">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {plans.map((plan, index) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {plans.map((plan, index) => (
+            <motion.div
+              key={plan.name}
+              variants={cardVariants}
+              whileHover={{
+                y: -10,
+                transition: { type: "spring", stiffness: 300 },
+              }}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl "
+            >
               <motion.div
-                key={plan.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden ${
-                  plan.featured ? "border-2 border-[#f99026]" : ""
-                }`}
+                transition={{ delay: 0.2 }}
+                className="p-6"
               >
-                <div className="px-6 py-8">
-                  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
-                    {plan.name}
-                  </h3>
-                  <p className="mt-2 text-gray-500 dark:text-gray-400 text-center">
-                    {plan.description}
-                  </p>
-                  <div className="mt-4 flex justify-center">
-                    <span className="text-5xl font-extrabold text-[#f99026]">
-                      {plan.price}
-                    </span>
-                    <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
-                      جنيه / {plan.unit}
-                    </span>
-                  </div>
-                  <ul className="mt-6 space-y-4">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <svg
-                          className="h-5 w-5 text-[#f99026]"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="mr-3 text-gray-600 dark:text-gray-300">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-8">
-                    <Link
-                      to="/booking"
-                      className="block w-full bg-[#f99026] text-white text-center px-4 py-2 rounded-md hover:bg-[#e07d15] transition-colors duration-200"
-                    >
-                      احجز الآن
-                    </Link>
-                  </div>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  {plan.name}
+                </h3>
+                <p className="mt-2 text-gray-600 dark:text-gray-300">
+                  {plan.description}
+                </p>
+                <div className="mt-4 flex justify-center">
+                  <span className="text-5xl font-extrabold text-[#f99026]">
+                    {plan.price}
+                  </span>
+                  <span className="mr-2 text-xl font-medium text-gray-500 dark:text-gray-300 self-end">
+                    جنيه / {plan.unit}
+                  </span>
                 </div>
+                <ul className="mt-6 space-y-4">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center">
+                      <svg
+                        className="h-5 w-5 text-[#f99026]"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span className="mr-3 text-gray-600 dark:text-gray-300">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Link
+                    to="/booking"
+                    className="mt-6 block w-full bg-[#f99026] text-white py-2 px-4 rounded-md hover:bg-[#e07d15] transition-all duration-300 text-center"
+                  >
+                    احجز الآن
+                  </Link>
+                </motion.div>
               </motion.div>
-            ))}
-          </div>
-        </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-        {/* Additional Information Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 100 }}
+          viewport={{ once: true }}
+          className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-lg px-6 py-8"
         >
-          <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+          <motion.h3
+            initial={{ x: -20 }}
+            whileInView={{ x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-2xl text-gray-900 mb-6 dark:text-white font-bold"
+          >
             معلومات إضافية
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+          </motion.h3>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            <div className="p-6 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300">
+              <h4 className="text-lg font-medium text-gray-900 mb-4 dark:text-white">
                 التأمين والضمان
               </h4>
-              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
-                <li className="flex items-center">
-                  <svg
-                    className="h-5 w-5 text-[#f99026] ml-2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+              <motion.ul
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1 }}
+                className="space-y-3 text-gray-600 dark:text-gray-300"
+              >
+                {[
+                  "تأمين ضد الحوادث والسرقة",
+                  "ضمان على البطارية والأعطال الفنية",
+                ].map((rule, index) => (
+                  <li
+                    key={index}
+                    initial={{ x: -20, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    <path d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  تأمين ضد الحوادث والسرقة
-                </li>
-                <li className="flex items-center">
-                  <svg
-                    className="h-5 w-5 text-[#f99026] ml-2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  ضمان على البطارية والأعطال الفنية
-                </li>
-              </ul>
+                    • {rule}
+                  </li>
+                ))}
+              </motion.ul>
             </div>
-            <div>
-              <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+
+            <div className="p-6 rounded-lg ">
+              <h4 className="text-lg font-medium text-gray-900 mb-4 dark:text-white">
                 شروط الاستخدام
               </h4>
-              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
-                <li className="flex items-center">
-                  <svg
-                    className="h-5 w-5 text-[#f99026] ml-2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  يجب أن يكون العمر 16 عاماً أو أكثر
-                </li>
-                <li className="flex items-center">
-                  <svg
-                    className="h-5 w-5 text-[#f99026] ml-2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  بطاقة هوية سارية
-                </li>
-              </ul>
+              <motion.ul
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1 }}
+                className="space-y-3 text-gray-600 dark:text-gray-300"
+              >
+                {["يجب أن يكون العمر 16 عاماً أو أكثر", "بطاقة هوية سارية"].map(
+                  (rule, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ x: -20, opacity: 0 }}
+                      whileInView={{ x: 0, opacity: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      • {rule}
+                    </motion.li>
+                  )
+                )}
+              </motion.ul>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
