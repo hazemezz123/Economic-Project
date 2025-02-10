@@ -6,6 +6,22 @@ import FormSelect from "../components/FormSelect";
 import FormInput from "../components/FormInput";
 
 function Booking({ user }) {
+  const pageVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+  };
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
@@ -107,91 +123,115 @@ function Booking({ user }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-25 ">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
           >
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center mb-8">
-              احجز سكوتر كهربائي
-            </h1>
+            {/* Enhanced Header */}
+            <div className="text-center mb-12">
+              <motion.h1
+                variants={cardVariants}
+                className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4"
+              >
+                احجز سكوتر كهربائي
+              </motion.h1>
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "100px" }}
+                transition={{ duration: 0.8 }}
+                className="h-1 bg-[#f99026] mx-auto"
+              />
+            </div>
 
-            <form
+            {/* Main Form */}
+            <motion.form
+              variants={cardVariants}
               onSubmit={handleSubmit}
-              className="space-y-6 bg-white dark:bg-gray-800 shadow rounded-lg p-6"
+              className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 border border-gray-100 dark:border-gray-700 space-y-8"
             >
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <FormSelect
-                  label="محطة الاستلام"
-                  name="pickupStation"
-                  value={formData.pickupStation}
-                  onChange={handleInputChange}
-                  required
-                  options={stationOptions}
-                  placeholder="اختر محطة"
-                />
+              {/* Stations Section */}
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  اختر المحطات
+                </h3>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  <FormSelect
+                    label="محطة الاستلام"
+                    name="pickupStation"
+                    value={formData.pickupStation}
+                    onChange={handleInputChange}
+                    required
+                    options={stationOptions}
+                    placeholder="اختر محطة"
+                  />
+                  <FormSelect
+                    label="محطة التسليم"
+                    name="dropoffStation"
+                    value={formData.dropoffStation}
+                    onChange={handleInputChange}
+                    required
+                    options={stationOptions}
+                    placeholder="اختر محطة"
+                  />
+                </div>
+              </div>
 
-                <FormSelect
-                  label="محطة التسليم"
-                  name="dropoffStation"
-                  value={formData.dropoffStation}
-                  onChange={handleInputChange}
-                  required
-                  options={stationOptions}
-                  placeholder="اختر محطة"
-                />
-
-                <FormSelect
-                  label="نوع الإيجار"
-                  name="rentalType"
-                  value={formData.rentalType}
-                  onChange={handleInputChange}
-                  required
-                  options={rentalTypeOptions}
-                />
-
-                <FormInput
-                  label={
-                    formData.rentalType === "hourly"
-                      ? "عدد الساعات"
-                      : "عدد الكيلومترات"
-                  }
-                  name="duration"
-                  type="number"
-                  min="1"
-                  value={formData.duration}
-                  onChange={handleInputChange}
-                  required
-                />
-
-                <FormInput
-                  label="التاريخ"
-                  name="date"
-                  type="date"
-                  value={formData.date}
-                  onChange={handleInputChange}
-                  required
-                  min={new Date().toISOString().split("T")[0]}
-                />
-
-                <FormInput
-                  label="الوقت"
-                  name="time"
-                  type="time"
-                  value={formData.time}
-                  onChange={handleInputChange}
-                  required
-                />
+              {/* Rental Details Section */}
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  تفاصيل الإيجار
+                </h3>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  <FormSelect
+                    label="نوع الإيجار"
+                    name="rentalType"
+                    value={formData.rentalType}
+                    onChange={handleInputChange}
+                    required
+                    options={rentalTypeOptions}
+                  />
+                  <FormInput
+                    label={
+                      formData.rentalType === "hourly"
+                        ? "عدد الساعات"
+                        : "عدد الكيلومترات"
+                    }
+                    name="duration"
+                    type="number"
+                    min="1"
+                    value={formData.duration}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <FormInput
+                    label="التاريخ"
+                    name="date"
+                    type="date"
+                    value={formData.date}
+                    onChange={handleInputChange}
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                  <FormInput
+                    label="الوقت"
+                    name="time"
+                    type="time"
+                    value={formData.time}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
               </div>
 
               {/* ID Card Upload Section */}
-              <div className="mt-6">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+              <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   صورة البطاقة الشخصية
-                </label>
+                </h3>
                 <div className="mt-1 flex flex-col items-center">
                   <input
                     type="file"
@@ -203,13 +243,11 @@ function Booking({ user }) {
                   />
                   <motion.button
                     type="button"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
                     onClick={handleCameraClick}
-                    className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f99026]"
+                    className="w-full flex cursor-pointer items-center justify-center px-6 py-3 border border-[#f99026] dark:border-[#f99026] rounded-xl shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700  dark:hover:bg-gray-600 "
                   >
                     <svg
-                      className="mr-2 h-5 w-5 text-gray-400"
+                      className="ml-2 h-6 w-6 text-[#f99026]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -229,85 +267,90 @@ function Booking({ user }) {
                     </svg>
                     التقط صورة للبطاقة الشخصية
                   </motion.button>
-                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                    يرجى التقاط صورة واضحة للبطاقة الشخصية
-                  </p>
-                </div>
-
-                {/* Image Preview */}
-                {idCardImage && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="mt-4"
-                  >
-                    <div className="relative rounded-lg overflow-hidden border-2 border-[#f99026] dark:border-[#f99026]">
-                      <img
-                        src={idCardImage}
-                        alt="معاينة البطاقة الشخصية"
-                        className="w-full h-48 object-cover"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setIdCardImage(null)}
-                        className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none"
-                      >
-                        <svg
-                          className="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
+                  {idCardImage && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="mt-4 w-full"
+                    >
+                      <div className="relative rounded-xl overflow-hidden border-2 border-[#f99026]">
+                        <img
+                          src={idCardImage}
+                          alt="معاينة البطاقة الشخصية"
+                          className="w-full h-48 object-cover"
+                        />
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          type="button"
+                          onClick={() => setIdCardImage(null)}
+                          className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
+                          <svg
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </motion.button>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </div>
 
               {/* Price Calculation */}
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+              <motion.div
+                variants={cardVariants}
+                className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-gray-700 dark:to-gray-600 p-6 rounded-xl shadow-sm"
+              >
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                   السعر المتوقع: {calculatePrice()} جنيه مصري
                 </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-300 mt-1">
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
                   {formData.rentalType === "hourly"
                     ? "السعر 20 جنيه مصري للساعة"
                     : "السعر 2 جنيه مصري للكيلومتر"}
                 </p>
-              </div>
+              </motion.div>
 
               {/* Submit Button */}
-              <div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#f99026] hover:bg-[#e07d15] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f99026] transition-colors duration-200"
-                >
-                  تأكيد الحجز
-                </motion.button>
-              </div>
-            </form>
-            {/* Contact Support Section */}
-            <div className="mt-8 bg-white dark:bg-gray-800 shadow rounded-lg p-6">
-              <div
+              <motion.button
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0 4px 15px rgba(249, 144, 38, 0.3)",
+                }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full cursor-pointer flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-lg text-lg font-medium text-white bg-gradient-to-r from-[#f99026] to-[#e07d15] hover:from-[#e07d15] hover:to-[#f99026] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f99026] transition-colors duration-200"
+              >
+                تأكيد الحجز
+              </motion.button>
+            </motion.form>
+
+            {/* Support Section */}
+            <motion.div
+              variants={cardVariants}
+              className="mt-8 bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 border border-gray-100 dark:border-gray-700"
+            >
+              <motion.div
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => setShowSupport(!showSupport)}
+                whileHover={{ scale: 1.01 }}
               >
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   تحتاج مساعدة؟
                 </h2>
-                <svg
-                  className={`h-6 w-6 transform transition-transform dark:text-white ${
-                    showSupport ? "rotate-180" : ""
-                  }`}
+                <motion.svg
+                  animate={{ rotate: showSupport ? 180 : 0 }}
+                  className="h-6 w-6 text-[#f99026]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -318,8 +361,8 @@ function Booking({ user }) {
                     strokeWidth={2}
                     d="M19 9l-7 7-7-7"
                   />
-                </svg>
-              </div>
+                </motion.svg>
+              </motion.div>
 
               <motion.div
                 initial={false}
@@ -330,8 +373,8 @@ function Booking({ user }) {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <div className="mt-4 space-y-4">
-                  <div className="flex items-center">
+                <div className="mt-6 space-y-4 bg-gray-50 dark:bg-gray-700 p-6 rounded-xl">
+                  <div className="flex items-center space-x-4">
                     <svg
                       className="h-6 w-6 text-[#f99026]"
                       fill="none"
@@ -345,12 +388,14 @@ function Booking({ user }) {
                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                       />
                     </svg>
-                    <span className="mr-2 text-gray-700 dark:text-gray-200">
-                      اتصل بنا: +20 123 456 7890
+                    <span
+                      style={{ direction: "ltr" }}
+                      className="text-gray-700 dark:text-gray-200 "
+                    >
+                      اتصل بنا: +20 100 52 91205
                     </span>
                   </div>
-
-                  <div className="flex items-center">
+                  <div className="flex items-center space-x-4">
                     <svg
                       className="h-6 w-6 text-[#f99026]"
                       fill="none"
@@ -364,12 +409,11 @@ function Booking({ user }) {
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
-                    <span className="mr-2 text-gray-700 dark:text-gray-200">
+                    <span className="text-gray-700 dark:text-gray-200">
                       البريد الإلكتروني: support@scooter-rental.eg
                     </span>
                   </div>
-
-                  <div className="flex items-center">
+                  <div className="flex items-center space-x-4">
                     <svg
                       className="h-6 w-6 text-[#f99026]"
                       fill="none"
@@ -383,13 +427,13 @@ function Booking({ user }) {
                         d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
                       />
                     </svg>
-                    <span className="mr-2 text-gray-700 dark:text-gray-200">
+                    <span className="text-gray-700 dark:text-gray-200">
                       الدعم الفوري متاح 24/7
                     </span>
                   </div>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

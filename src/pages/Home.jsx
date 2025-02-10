@@ -372,12 +372,12 @@ function Home() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="relative"
+              className="relative max-md:hidden"
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="rounded-2xl overflow-hidden shadow-2xl"
+                className="rounded-2xl overflow-hidden shadow-2xl "
               >
                 <img
                   src="/Home/Company-pana.png"
@@ -424,7 +424,7 @@ function Home() {
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-all duration-300 transform hover:shadow-2xl"
+            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026]  transform hover:shadow-2xl"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -451,7 +451,7 @@ function Home() {
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-all duration-300 transform hover:shadow-2xl"
+            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026]  transform hover:shadow-2xl"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -478,7 +478,7 @@ function Home() {
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026] transition-all duration-300 transform hover:shadow-2xl sm:col-span-2 md:col-span-1"
+            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:border-[#f99026] dark:hover:border-[#f99026transform hover:shadow-2xl sm:col-span-2 md:col-span-1"
           >
             <motion.div
               initial={{ scale: 0 }}

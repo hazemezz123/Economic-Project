@@ -12,6 +12,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
+import TermsOfUse from "./pages/TermsOfUse";
 function App() {
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
@@ -30,6 +32,8 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/stations" element={<Stations />} />
               <Route path="/aboutUs" element={<AboutUs />} />
+              <Route path="/ContactUs" element={<ContactUs />} />
+              <Route path="/TermsOfUse" element={<TermsOfUse />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/login" element={<Login setUser={setUser} />} />
               <Route

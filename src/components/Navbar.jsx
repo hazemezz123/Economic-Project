@@ -84,7 +84,8 @@ function Navbar({ user, setUser }) {
                 { to: "/pricing", text: "الأسعار" },
                 { to: "/stations", text: "المحطات" },
                 { to: "/faq", text: "الأسئلة الشائعة" },
-                { to: "/about", text: "من نحن ؟" },
+                { to: "/aboutUs", text: "من نحن ؟" },
+                { to: "/ContactUs", text: "تواصل معنا" },
               ].map((link) => (
                 <motion.div
                   key={link.to}
