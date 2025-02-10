@@ -23,7 +23,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
-        <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+        <div className="min-h-screen flex flex-col overflow-x-hidden relative w-full bg-gray-50 dark:bg-gray-900">
           <Navbar user={user} setUser={setUser} />
           <main className="flex-grow">
             <Routes>

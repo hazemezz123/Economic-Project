@@ -398,7 +398,7 @@ function Home() {
               </motion.div>
 
               <motion.div
-                initial={{ scale: 0, rotate: -180 }}
+                initial={{ scale: 0 }}
                 whileInView={{ scale: 1, rotate: 0 }}
                 transition={{ type: "spring", stiffness: 200 }}
                 className="absolute -top-8 -right-8 bg-gradient-to-r from-[#f99026] to-[#e07d15] text-white p-6 rounded-2xl shadow-xl"
@@ -508,7 +508,6 @@ function Home() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.2 }}
-        viewport={{ once: true }}
         className="mt-16 text-center"
       >
         <Link
@@ -535,3 +534,5 @@ function Home() {
 }
 
 export default Home;
+
+
