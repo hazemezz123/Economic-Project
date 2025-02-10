@@ -76,7 +76,7 @@ function Navbar({ user, setUser }) {
                 alt="Scooter Rental"
               />
             </Link>
-            <div className="hidden sm:mr-6 sm:flex sm:space-x-8 sm:items-center">
+            <div className="hidden sm:mr-6 xl:flex sm:space-x-8 sm:items-center">
               {/* Desktop Navigation Links */}
               {[
                 { to: "/", text: "الرئيسية" },
@@ -104,7 +104,7 @@ function Navbar({ user, setUser }) {
           </div>
 
           {/* Desktop Auth Buttons */}
-          <div className="hidden sm:flex sm:items-center sm:mr-6 space-x-4">
+          <div className="hidden xl:flex sm:items-center sm:mr-6 space-x-4">
             <ThemeToggle />
             {user ? (
               <div className="flex items-center gap-4">
@@ -164,7 +164,7 @@ function Navbar({ user, setUser }) {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="sm:hidden p-2 rounded-md text-gray-400 hover:text-orange-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
+            className="xl:hidden p-2 rounded-md text-gray-400 hover:text-orange-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
           >
             <span className="sr-only">القائمة</span>
             <motion.svg
@@ -202,7 +202,7 @@ function Navbar({ user, setUser }) {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="lg:hidden bg-white dark:bg-gray-800 shadow-lg"
+            className="xl:hidden bg-white dark:bg-gray-800 shadow-lg"
           >
             <motion.div className="px-2 pt-2 pb-3 space-y-1">
               {[
@@ -211,7 +211,7 @@ function Navbar({ user, setUser }) {
                 { to: "/pricing", text: "الأسعار" },
                 { to: "/stations", text: "المحطات" },
                 { to: "/faq", text: "الأسئلة الشائعة" },
-                { to: "/about", text: "من نحن ؟" },
+                { to: "/aboutUs", text: "من نحن ؟" },
               ].map((link) => (
                 <motion.div
                   key={link.to}
