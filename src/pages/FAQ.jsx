@@ -156,6 +156,7 @@ function FAQ() {
                   فريق خدمة العملاء متاح على مدار الساعة لمساعدتك
                 </p>
                 <div className="mt-6 flex justify-center gap-4">
+                  
                   <motion.a
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

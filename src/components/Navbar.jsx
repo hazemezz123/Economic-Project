@@ -202,7 +202,7 @@ function Navbar({ user, setUser }) {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="sm:hidden bg-white dark:bg-gray-800 shadow-lg"
+            className="lg:hidden bg-white dark:bg-gray-800 shadow-lg"
           >
             <motion.div className="px-2 pt-2 pb-3 space-y-1">
               {[
