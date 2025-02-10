@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 const ContactUs = () => {
+  const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({
+    show: false,
+    isSuccess: false,
+    message: "",
+  });
   const pageVariants = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -37,22 +45,75 @@ const ContactUs = () => {
     },
   ];
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    emailjs
+      .sendForm(
+        "service_98k8dc8",
+        "template_iev0s7v",
+        form.current,
+        "Ef9BuuT4r_8kwD4f_"
+      )
+      .then((result) => {
+        setSubmitStatus({
+          show: true,
+          isSuccess: true,
+          message: "تم إرسال رسالتك بنجاح!",
+        });
+        form.current.reset();
+      })
+      .catch((error) => {
+        setSubmitStatus({
+          show: true,
+          isSuccess: false,
+          message: "حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.",
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+        setTimeout(() => {
+          setSubmitStatus({ show: false, isSuccess: false, message: "" });
+        }, 5000);
+      });
+  };
+
   return (
     <AnimatePresence>
-      <div className="min-h-screen p-25 bg-gray-50 dark:bg-gray-900 ">
+      <div className="min-h-screen p-25 bg-gray-50 dark:bg-gray-900">
         <motion.div
           variants={pageVariants}
           initial="initial"
           animate="animate"
           exit="exit"
           transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto"
+          className="max-w-2xl mx-auto px-4 py-16"
         >
           <h1 className="text-4xl font-bold text-center mb-8 text-orange-500 dark:text-orange-400">
             تواصل معنا
           </h1>
 
+          <AnimatePresence>
+            {submitStatus.show && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className={`mb-4 p-4 rounded-lg ${
+                  submitStatus.isSuccess
+                    ? "bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-100"
+                    : "bg-red-100 text-red-700 dark:bg-red-800 dark:text-red-100"
+                }`}
+              >
+                {submitStatus.message}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <motion.form
+            ref={form}
+            onSubmit={handleSubmit}
             variants={formVariants}
             initial="initial"
             animate="animate"
@@ -65,7 +126,9 @@ const ContactUs = () => {
               </label>
               <input
                 type="text"
+                name="user_name"
                 placeholder="أدخل اسمك"
+                required
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 
                          focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none 
                          bg-white dark:bg-gray-800 text-gray-900 dark:text-white 
@@ -79,7 +142,9 @@ const ContactUs = () => {
               </label>
               <input
                 type="email"
+                name="user_email"
                 placeholder="أدخل بريدك الإلكتروني"
+                required
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 
                          focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none 
                          bg-white dark:bg-gray-800 text-gray-900 dark:text-white 
@@ -92,8 +157,10 @@ const ContactUs = () => {
                 الرسالة
               </label>
               <textarea
+                name="message"
                 rows="5"
                 placeholder="اكتب رسالتك هنا"
+                required
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 
                          focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none 
                          bg-white dark:bg-gray-800 text-gray-900 dark:text-white 
@@ -102,17 +169,22 @@ const ContactUs = () => {
             </div>
 
             <motion.button
+              type="submit"
+              disabled={isSubmitting}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full px-6 py-3 text-white bg-orange-500 rounded-lg 
-                       hover:bg-orange-600 dark:hover:bg-orange-600 
-                       transition duration-300 ease-in-out transform"
+              className={`w-full px-6 py-3 text-white rounded-lg 
+                       transition duration-300 ease-in-out transform
+                       ${
+                         isSubmitting
+                           ? "bg-gray-400 cursor-not-allowed"
+                           : "bg-orange-500 hover:bg-orange-600 dark:hover:bg-orange-600"
+                       }`}
             >
-              إرسال الرسالة
+              {isSubmitting ? "جاري الإرسال..." : "إرسال الرسالة"}
             </motion.button>
           </motion.form>
 
-          {/* Updated Social Media Section */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

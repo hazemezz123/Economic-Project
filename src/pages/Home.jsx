@@ -432,7 +432,19 @@ function Home() {
               transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
               className="bg-gradient-to-r from-[#f99026] to-[#e07d15] w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
             >
-              <span className="text-2xl text-white">🎯</span>
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
             </motion.div>
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -459,7 +471,19 @@ function Home() {
               transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
               className="bg-gradient-to-r from-[#f99026] to-[#e07d15] w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
             >
-              <span className="text-2xl text-white">⏰</span>
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </motion.div>
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -486,7 +510,19 @@ function Home() {
               transition={{ type: "spring", stiffness: 200, delay: 0.3 }}
               className="bg-gradient-to-r from-[#f99026] to-[#e07d15] w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
             >
-              <span className="text-2xl text-white">🛡️</span>
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
             </motion.div>
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -504,12 +540,7 @@ function Home() {
       </div>
 
       {/* CTA Button */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-        className="mt-16 text-center"
-      >
+      <motion.div animate={{ opacity: 1, y: 0 }} className="mt-16 text-center">
         <Link
           to="/stations"
           className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#f99026] hover:bg-[#e07d15] transition-colors duration-200 mb-7"
@@ -534,5 +565,3 @@ function Home() {
 }
 
 export default Home;
-
-
