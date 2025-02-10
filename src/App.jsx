@@ -11,7 +11,7 @@ import FAQ from "./pages/FAQ";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-
+import AboutUs from "./pages/AboutUs";
 function App() {
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
@@ -29,6 +29,7 @@ function App() {
               <Route path="/booking" element={<Booking user={user} />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/stations" element={<Stations />} />
+              <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/login" element={<Login setUser={setUser} />} />
               <Route

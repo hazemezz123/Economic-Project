@@ -35,5 +35,5 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-blue-500 rounded-full dark:bg-blue-700;
+  @apply bg-orange-500 rounded-full;
 }
