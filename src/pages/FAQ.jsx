@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { Link } from "react-router-dom";
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
   const [showSupport, setShowSupport] = useState(false);
@@ -155,24 +155,28 @@ function FAQ() {
                 <p className="mt-3 text-orange-500 dark:text-orange-400">
                   فريق خدمة العملاء متاح على مدار الساعة لمساعدتك
                 </p>
-                <div className="mt-6 flex justify-center gap-4">
-                  
-                  <motion.a
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    href="tel:+201234567890"
-                    className="px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-200 shadow-lg"
-                  >
-                    اتصل بنا
-                  </motion.a>
-                  <motion.a
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    href="mailto:support@scooter-rental.eg"
-                    className="px-6 py-3 border-2 border-orange-500 text-orange-500 rounded-full hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-lg"
-                  >
-                    راسلنا
-                  </motion.a>
+                <div className="mt-10 flex justify-center gap-4">
+                  <Link>
+                    <motion.a
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      href="tel:+201005291205"
+                      className="px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-200 shadow-lg"
+                    >
+                      اتصل بنا
+                    </motion.a>
+                  </Link>
+
+                  <Link to="/ContactUs">
+                    <motion.a
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      href=""
+                      className="px-6 py-3 border-2 border-orange-500 text-orange-500 rounded-full hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-lg"
+                    >
+                      راسلنا
+                    </motion.a>
+                  </Link>
                 </div>
               </div>
             </motion.div>
