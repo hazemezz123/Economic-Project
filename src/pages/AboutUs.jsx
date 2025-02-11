@@ -11,10 +11,9 @@ const AboutUs = () => {
   const teamMembers = [
     {
       name: "شهد فوزي",
-      role: "المؤسس والرئيس التنفيذي",
+      role: " R&D in IEEE ",
       image: "/Profiles/shahdfawzy.jpg",
-      description:
-        "خبرة 15 عاماً في مجال النقل والتكنولوجيا. حاصل على درجة الماجستير في إدارة الأعمال وله العديد من المشاريع الناجحة في مجال النقل المستدام.",
+      description: "",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/shahdfawzy2007/",
       },
@@ -24,7 +23,7 @@ const AboutUs = () => {
       role: " مطور مواقع",
       image: "/Profiles/Hazem.jpg",
       description:
-        "متخصصة في إدارة العمليات وتطوير الأعمال. ساهمت في نمو العديد من الشركات الناشئة في مجال التكنولوجيا والنقل.",
+        " مطور مواقع متخصص في React, Tailwind CSS, Framer Motion, PHP، و MySQL. لديك خبرة في تطوير مواقع وتطبيقات ويب تركز على الأداء وتجربة المستخدم، بما في ذلك نظام مسابقات طلابية، موقع شركة أمنية، وموقع لتأجير السكوترات الكهربائية في مصر. تسعى دائمًا لتقديم حلول برمجية احترافية ",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/hazem-ezz-424498285/",
       },
@@ -41,9 +40,9 @@ const AboutUs = () => {
     },
     {
       name: " أميره محمد ",
-      role: " تيم ليدر ",
+      role: "  HR in IEEE ",
       image: "/Profiles/Amira.jpg",
-      description: "مش عارف والله لسه هكتب",
+      description: " طالبة في مدرسة وي  قسم برمجيات     ",
       socialLinks: {
         linkedin:
           "https://www.linkedin.com/in/amira-mohammed-818b78290/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
@@ -52,11 +51,28 @@ const AboutUs = () => {
     {
       name: " عمر  فاروق ",
       role: "  مساعد اول ",
-      image: "/Profiles/Omar.png",
+      image: "/Profiles/Omar.jpg",
       description: "شغال عندي",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/omar-farok-005860268/",
       },
+    },
+  ];
+  const supporters = [
+    {
+      name: "Hazem",
+      image: "/Supporters/bh.jpg", // Add your supporter images
+      description: "الراعي الرسمي للمشروع",
+    },
+    {
+      name: "عمر محمد فاروق",
+      image: "/Supporters/bo.jpg",
+      description: "شريك تنموي",
+    },
+    {
+      name: "بلال محمد ",
+      image: "/Supporters/bo1.jpg",
+      description: "شريك استراتيجي",
     },
   ];
 
@@ -178,8 +194,116 @@ const AboutUs = () => {
       {teamMembers.map((member, index) => (
         <TeamMemberCard key={member.name} member={member} index={index} />
       ))}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-7xl mx-auto text-center"
+        >
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+          >
+            مراحل تطوير المشروع
+          </motion.h2>
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "100px" }}
+            transition={{ duration: 0.8 }}
+            className="h-1 bg-orange-500 mx-auto mb-8"
+          />
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+          >
+            نستعرض معكم رحلة تطوير المشروع والجهود المبذولة في كل مرحلة
+          </motion.p>
+        </motion.div>
+      </section>
+
+      {/* Individual Supporter Sections */}
+      {supporters.map((supporter, index) => (
+        <SupporterSection
+          key={supporter.name || index}
+          supporter={supporter}
+          index={index}
+        />
+      ))}
     </div>
   );
 };
 
+const SupporterSection = ({ supporter, index }) => {
+  const isEven = index % 2 === 0;
+
+  return (
+    <section className="min-h-screen relative overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto h-full flex items-center"
+      >
+        <div
+          className={`grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full ${
+            isEven ? "" : "md:dir-rtl"
+          }`}
+        >
+          {/* Image Side */}
+          <motion.div
+            initial={{ x: isEven ? -100 : 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl"
+          >
+            <Suspense fallback={<ImagePlaceholder />}>
+              <LazyImage
+                src={supporter.image}
+                alt={supporter.name}
+                className="w-full h-full object-cover"
+              />
+            </Suspense>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+          </motion.div>
+
+          {/* Content Side */}
+          <motion.div
+            initial={{ x: isEven ? 100 : -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="space-y-6 p-4 sm:p-6 md:p-8 text-right"
+          >
+            <div className="space-y-4">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white"
+              >
+                {supporter.name}
+              </motion.h2>
+              <div className="h-1 w-20 bg-orange-500 mr-0" />
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+              >
+                {supporter.description}
+              </motion.p>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
+  );
+};
 export default AboutUs;

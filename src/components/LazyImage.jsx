@@ -54,3 +54,5 @@ const LazyImage = ({ src, alt, className }) => {
 };
 
 export default LazyImage;
+
+
