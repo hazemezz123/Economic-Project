@@ -8,7 +8,7 @@ function Stations() {
       name: "محطة السلام",
       address: "  بجوار الجامع الكبير , جامعه السويس ",
       image: "/stations/El_salam.jpg",
-      availableScooters: 8,
+      availableScooters: 9,
       workingHours: "24/7",
     },
     {
@@ -16,7 +16,7 @@ function Stations() {
       name: "محطة العوايد",
       address: "شارع 23 يوليو، العوايد ",
       image: "/stations/PortTawifq.jpeg",
-      availableScooters: 7,
+      availableScooters: 8,
       workingHours: "24/7",
     },
     {
@@ -24,7 +24,7 @@ function Stations() {
       name: "محطة الحديقة الفرنسية ",
       address: "  بورتوفيق ,السويس",
       image: "/stations/FranceGraden.png",
-      availableScooters: 7,
+      availableScooters: 8,
       workingHours: "24/7",
     },
   ];
