@@ -207,7 +207,7 @@ const AboutUs = () => {
             whileInView={{ y: 0, opacity: 1 }}
             className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
           >
-            مراحل تطوير المشروع
+            شركاء النجاح
           </motion.h2>
           <motion.div
             initial={{ width: 0 }}
@@ -220,9 +220,7 @@ const AboutUs = () => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-          >
-            نستعرض معكم رحلة تطوير المشروع والجهود المبذولة في كل مرحلة
-          </motion.p>
+          ></motion.p>
         </motion.div>
       </section>
 
