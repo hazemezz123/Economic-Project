@@ -1,198 +1,183 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 
+const LazyImage = lazy(() => import("../components/LazyImage"));
+
+const ImagePlaceholder = () => (
+  <div className="animate-pulse bg-gray-200 dark:bg-gray-700 w-full h-full rounded-3xl" />
+);
+
 const AboutUs = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
+  const teamMembers = [
+    {
+      name: "شهد فوزي",
+      role: "المؤسس والرئيس التنفيذي",
+      image: "/Profiles/shahdfawzy.jpg",
+      description:
+        "خبرة 15 عاماً في مجال النقل والتكنولوجيا. حاصل على درجة الماجستير في إدارة الأعمال وله العديد من المشاريع الناجحة في مجال النقل المستدام.",
+      socialLinks: {
+        linkedin: "https://www.linkedin.com/in/shahdfawzy2007/",
       },
     },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
+    {
+      name: "حازم محمد",
+      role: " مطور مواقع",
+      image: "/Profiles/Hazem.jpg",
+      description:
+        "متخصصة في إدارة العمليات وتطوير الأعمال. ساهمت في نمو العديد من الشركات الناشئة في مجال التكنولوجيا والنقل.",
+      socialLinks: {
+        linkedin: "https://www.linkedin.com/in/hazem-ezz-424498285/",
       },
     },
-  };
-
-  const scaleVariants = {
-    hover: {
-      scale: 1.05,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut",
+    {
+      name: "شهيد محمد ",
+      role: "رئيس قسم التكنولوجيا",
+      image: "/Profiles/Shaheed.png",
+      description:
+        "مهندس برمجيات متخصص في تطوير التطبيقات وأنظمة إدارة الأساطيل. له خبرة واسعة في مجال التقنيات الحديثة وإنترنت الأشياء.",
+      socialLinks: {
+        linkedin: "https://www.linkedin.com/in/shaheed-mohamed-6618b3348/",
       },
     },
-  };
-
-  const statsData = [
-    { number: "10+", text: "سنوات من الخبرة" },
-    { number: "500+", text: "عميل سعيد" },
-    { number: "150+", text: "مشروع مكتمل" },
-    { number: "50+", text: "خبير متخصص" },
+    {
+      name: " أميره محمد ",
+      role: " تيم ليدر ",
+      image: "/Profiles/Amira.jpg",
+      description: "مش عارف والله لسه هكتب",
+      socialLinks: {
+        linkedin:
+          "https://www.linkedin.com/in/amira-mohammed-818b78290/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      },
+    },
+    {
+      name: " عمر  فاروق ",
+      role: "  مساعد اول ",
+      image: "/Profiles/Omar.png",
+      description: "شغال عندي",
+      socialLinks: {
+        linkedin: "https://www.linkedin.com/in/omar-farok-005860268/",
+      },
+    },
   ];
 
-  const features = [
-    {
-      title: "رؤيتنا",
-      description: "نسعى لتحقيق التميز في مجال الاقتصاد والأعمال",
-      icon: "👁️",
-    },
-    {
-      title: "مهمتنا",
-      description: "تقديم حلول مبتكرة تلبي احتياجات عملائنا",
-      icon: "🎯",
-    },
-    {
-      title: "قيمنا",
-      description: "الشفافية، النزاهة، والتفاني في العمل",
-      icon: "⭐",
-    },
-  ];
+  // Create a new component for the team member card
+  const TeamMemberCard = ({ member, index }) => (
+    <section className="min-h-screen relative overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto h-full flex items-center"
+      >
+        <div
+          className={`grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full ${
+            index % 2 === 0 ? "md:dir-rtl" : ""
+          }`}
+        >
+          {/* Image Side */}
+          <motion.div
+            initial={{ x: index % 2 === 0 ? 100 : -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl"
+          >
+            <Suspense fallback={<ImagePlaceholder />}>
+              <LazyImage
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover"
+              />
+            </Suspense>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+          </motion.div>
+
+          {/* Content Side */}
+          <motion.div
+            initial={{ x: index % 2 === 0 ? -100 : 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="space-y-6 p-4 sm:p-6 md:p-8 text-right"
+          >
+            <div className="space-y-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+                {member.name}
+              </h2>
+              <div className="h-1 w-20 bg-orange-500 mr-0" />
+              <h3 className="text-xl sm:text-2xl text-orange-500 font-semibold">
+                {member.role}
+              </h3>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                {member.description}
+              </p>
+            </div>
+
+            {/* Social Links */}
+            {member.socialLinks.linkedin && (
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                href={member.socialLinks.linkedin}
+                className="inline-flex bg-orange-500 p-2 sm:p-3 rounded-full text-white hover:bg-orange-600 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`LinkedIn profile of ${member.name}`}
+              >
+                <svg
+                  className="w-5 h-5 sm:w-6 sm:h-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </motion.a>
+            )}
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-25 px-4 sm:px-6 lg:px-8">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-7xl mx-auto"
-      >
-        {/* Hero Section */}
-        <motion.div variants={itemVariants} className="text-center mb-20">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
+    <div className="bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      {/* Hero Section */}
+      <section className="h-screen relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Suspense fallback={<ImagePlaceholder />}>
+            <LazyImage
+              src="/About/about-hero.jpg"
+              alt="About Us Hero"
+              className="w-full h-full object-cover"
+            />
+          </Suspense>
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl font-bold text-gray-900 dark:text-white mb-6"
+            className="text-center text-white max-w-4xl mx-auto px-4"
           >
-            من نحن
-          </motion.h1>
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-24 h-1 bg-orange-500 mx-auto mb-8"
-          />
-          <motion.p
-            variants={itemVariants}
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
-          >
-            نحن شركة رائدة في مجال الاستشارات الاقتصادية والمالية، نقدم حلولاً
-            مبتكرة ونساعد عملائنا على تحقيق أهدافهم بكفاءة وفعالية
-          </motion.p>
-        </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          variants={containerVariants}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20"
-        >
-          {statsData.map((stat, index) => (
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">فريق العمل</h1>
             <motion.div
-              key={index}
-              variants={scaleVariants}
-              whileHover="hover"
-              className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg text-center transform hover:shadow-xl transition-shadow duration-300"
-            >
-              <motion.h3
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-4xl font-bold text-orange-500 mb-2"
-              >
-                {stat.number}
-              </motion.h3>
-              <p className="text-gray-600 dark:text-gray-300">{stat.text}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Features Section */}
-        <motion.div
-          variants={containerVariants}
-          className="grid md:grid-cols-3 gap-8 mb-20"
-        >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ y: -10 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg text-center"
-            >
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="text-4xl mb-4 block"
-              >
-                {feature.icon}
-              </motion.span>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                {feature.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Team Section */}
-        <motion.div variants={containerVariants} className="text-center">
-          <motion.h2
-            variants={itemVariants}
-            className="text-3xl font-bold text-gray-900 dark:text-white mb-16"
-          >
-            فريقنا المتميز
-          </motion.h2>
-          <motion.div
-            variants={containerVariants}
-            className="grid md:grid-cols-3 gap-12"
-          >
-            {[1, 2, 3].map((_, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ y: -10 }}
-                className="relative"
-              >
-                <div className="bg-gradient-to-b from-orange-400 to-orange-600 rounded-2xl p-1">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
-                    <div className="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                      اسم الخبير
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      المسمى الوظيفي
-                    </p>
-                    <div className="flex justify-center space-x-4">
-                      {/* Social Media Icons */}
-                      <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        className="w-8 h-8 rounded-full bg-orange-500 cursor-pointer"
-                      />
-                      <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        className="w-8 h-8 rounded-full bg-orange-500 cursor-pointer"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+              initial={{ width: 0 }}
+              animate={{ width: "100px" }}
+              transition={{ duration: 0.8 }}
+              className="h-1 bg-orange-500 mx-auto mt-4 mb-6"
+            />
+            <p className="text-xl md:text-2xl text-gray-200">
+              تعرف على الفريق المتميز الذي يقود مسيرة نجاحنا
+            </p>
           </motion.div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </section>
+
+      {/* Team Member Cards */}
+      {teamMembers.map((member, index) => (
+        <TeamMemberCard key={member.name} member={member} index={index} />
+      ))}
     </div>
   );
 };
