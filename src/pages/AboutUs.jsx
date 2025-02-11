@@ -147,7 +147,7 @@ const AboutUs = () => {
         <div className="absolute inset-0">
           <Suspense fallback={<ImagePlaceholder />}>
             <LazyImage
-              src="/About/about-hero.jpg"
+              src="/TeamWork.jpg"
               alt="About Us Hero"
               className="w-full h-full object-cover"
             />
