@@ -81,7 +81,7 @@ const ContactUs = () => {
 
   return (
     <AnimatePresence>
-      <div className="min-h-screen p-25 bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen pt-25  bg-gray-50 dark:bg-gray-900">
         <motion.div
           variants={pageVariants}
           initial="initial"

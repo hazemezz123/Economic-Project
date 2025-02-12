@@ -61,6 +61,12 @@ function Navbar({ user, setUser }) {
       scale: 0.95,
     },
   };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // for smooth scrolling
+    });
+  };
 
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-md fixed w-full top-0 z-50  ">
@@ -93,6 +99,7 @@ function Navbar({ user, setUser }) {
                   whileTap={{ y: 0 }}
                 >
                   <Link
+                    onClick={scrollToTop}
                     to={link.to}
                     className="text-gray-900 dark:text-gray-100 hover:text-orange-600 dark:hover:text-orange-400 px-3 py-2 rounded-md text-sm font-bold transition-colors duration-200"
                   >
@@ -212,6 +219,7 @@ function Navbar({ user, setUser }) {
                 { to: "/stations", text: "المحطات" },
                 { to: "/faq", text: "الأسئلة الشائعة" },
                 { to: "/aboutUs", text: "من نحن ؟" },
+                { to: "/ContactUs", text: "تواصل معنا" },
               ].map((link) => (
                 <motion.div
                   key={link.to}
@@ -220,7 +228,10 @@ function Navbar({ user, setUser }) {
                 >
                   <Link
                     to={link.to}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      scrollToTop();
+                    }}
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
                   >
                     {link.text}

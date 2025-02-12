@@ -23,13 +23,17 @@ function Footer() {
     hover: { scale: 1.2, rotate: 5 },
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // for smooth scrolling
+    });
+  };
   return (
     <footer className="bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 shadow-inner">
       <motion.div
         initial="hidden"
         whileInView="visible"
-        variants={containerVariants}
-        viewport={{ once: true }}
         className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8"
       >
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
@@ -65,6 +69,7 @@ function Footer() {
               ].map((link) => (
                 <motion.li key={link.to} whileHover={{ x: 5 }}>
                   <Link
+                    onClick={scrollToTop}
                     to={link.to}
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-200"
                   >

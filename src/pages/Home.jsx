@@ -22,7 +22,7 @@ function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl leading-tight drop-shadow-lg"
+                className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl leading-25 drop-shadow-lg"
               >
                 <span className="block">استأجر سكوتر كهربائي</span>
                 <span className="block text-[#f99026] text-shadow">
