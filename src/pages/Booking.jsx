@@ -61,6 +61,7 @@ function Booking({ user }) {
   const rentalTypeOptions = [
     { value: "hourly", label: "بالساعة" },
     { value: "kilometer", label: "بالكيلومتر" },
+    { value: "day", label: "يومي" },
   ];
 
   const handleInputChange = (e) => {
@@ -87,7 +88,12 @@ function Booking({ user }) {
   };
 
   const calculatePrice = () => {
-    const basePrice = formData.rentalType === "hourly" ? 20 : 2;
+    const basePrice =
+      formData.rentalType === "hourly"
+        ? 20
+        : formData.rentalType === "day"
+        ? 75
+        : 2;
     return basePrice * formData.duration;
   };
 
@@ -198,11 +204,20 @@ function Booking({ user }) {
                     label={
                       formData.rentalType === "hourly"
                         ? "عدد الساعات"
-                        : "عدد الكيلومترات"
+                        : formData.rentalType === "day"
+                        ? " يوم واحد"
+                        : "الكيلومترات"
                     }
                     name="duration"
                     type="number"
                     min="1"
+                    max={
+                      formData.rentalType === "day"
+                        ? 1
+                        : formData.rentalType === " hourly"
+                        ? 10
+                        : 30
+                    }
                     value={formData.duration}
                     onChange={handleInputChange}
                     required
@@ -317,7 +332,9 @@ function Booking({ user }) {
                 <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
                   {formData.rentalType === "hourly"
                     ? "السعر 20 جنيه مصري للساعة"
-                    : "السعر 2 جنيه مصري للكيلومتر"}
+                    : formData.rentalType === "kilometer"
+                    ? "السعر 2 جنيه مصري للكيلومتر"
+                    : "السعر 75 لليوم الواحد"}
                 </p>
               </motion.div>
 

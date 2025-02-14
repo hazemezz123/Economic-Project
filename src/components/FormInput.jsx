@@ -29,7 +29,10 @@ function FormInput({
         required={required}
         min={min}
         placeholder={placeholder}
-        className="mt-1 block w-full py-2 px-3 border  border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#f99026] focus:border-[#f99026] dark:border-none dark:bg-gray-700 dark:text-white"
+        className="
+         mt-1 block w-full py-2 px-3 border  border-gray-300 bg-white rounded-md
+         shadow-sm focus:outline-none focus:ring-[#f99026] focus:border-[#f99026] 
+         dark:border-none dark:bg-gray-700 dark:text-white"
         {...props}
       />
     </div>
